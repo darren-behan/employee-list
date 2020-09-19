@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import "./index.css";
 
 function EmployeeTable(props) {
+  console.log(props.employees);
   return (
     <Table striped bordered hover>
       <thead>
@@ -15,15 +16,23 @@ function EmployeeTable(props) {
         </tr>
       </thead>
       <tbody>
-      {props.employees.map(employee => (
-        <tr>
-          <td><img src={employee.image} alt="emp-img" /></td>
-          <td>{employee.name}</td>
-          <td>{employee.email}</td>
-          <td>{employee.phone}</td>
-          <td>{employee.dob}</td>
-        </tr>
-      ))}
+        {props.employees.length > 0 ? 
+          props.employees.map(employee => (
+            employee.name.includes(props.search)
+            ?
+            <tr>
+              <td><img src={employee.image} alt="emp-img" /></td>
+              <td>{employee.name}</td>
+              <td>{employee.email}</td>
+              <td>{employee.phone}</td>
+              <td>{employee.dob}</td>
+            </tr>
+            :
+            null
+          ))
+          :
+          null
+        }
       </tbody>
     </Table>
   )

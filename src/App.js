@@ -19,14 +19,18 @@ class App extends Component {
   }
 
   handleInputChange = event => {
+    console.log(event);
     this.setState({
       pending: event.target.value
     });
+    console.log(this.state.pending);
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
+    console.log(event);
     this.setState({ search: this.state.pending})
+    console.log(this.state.search);
   };
 
 
