@@ -9,20 +9,36 @@ import Employees from "./Employees.json";
 
 class App extends Component {
   state = {
-    employees: []
+    employees: [],
+    pending: "",
+    search: ""
   }
 
   componentDidMount() {
     this.setState({ employees: Employees });
-    console.log(this.state.employees);
   }
+
+  handleInputChange = event => {
+    this.setState({
+      pending: event.target.value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.setState({ search: this.state.pending})
+  };
 
 
   render() {
     return (
       <Wrapper >
         <Header />
-        <Nav />
+        <Nav 
+          value={this.state.pending}
+          handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
+        />
         <Table employees={this.state.employees} />
       </Wrapper>
     );
