@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Employees from "../../Employees.json";
-import "./index.css";
 
 function EmployeeTableBody() {
   // Setting this.state.friends to the friends json array

@@ -3,13 +3,15 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Wrapper from "./components/Wrapper";
 import Header from "./components/Header";
-import Main from "./components/Main";
+import Nav from './components/Nav';
+import Table from './components/Table';
 
 function App() {
   return (
     <Wrapper >
       <Header />
-      <Main />
+      <Nav />
+      <Table />
     </Wrapper>
   );
 }
