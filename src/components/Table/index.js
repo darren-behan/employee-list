@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
-import EmployeeTableBody from '../TableBody';
+import Employees from "../../Employees.json";
 import "./index.css";
 
 function EmployeeTable() {
+  // Setting this.state.employees to the employees json array
+  const [state, setState] = useState(Employees);
   return (
     <Table striped bordered hover>
       <thead>
@@ -15,7 +17,17 @@ function EmployeeTable() {
           <th>DOB</th>
         </tr>
       </thead>
-      <EmployeeTableBody />
+      <tbody>
+      {state.map(employee => (
+        <tr>
+          <td><img src={employee.image} alt="emp-img" /></td>
+          <td>{employee.name}</td>
+          <td>{employee.email}</td>
+          <td>{employee.phone}</td>
+          <td>{employee.dob}</td>
+        </tr>
+      ))}
+      </tbody>
     </Table>
   )
 }
