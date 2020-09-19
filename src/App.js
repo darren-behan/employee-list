@@ -6,14 +6,16 @@ import Header from "./components/Header";
 import Nav from './components/Nav';
 import Table from './components/Table';
 
-function App() {
-  return (
-    <Wrapper >
-      <Header />
-      <Nav />
-      <Table />
-    </Wrapper>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <Wrapper >
+        <Header />
+        <Nav />
+        <Table />
+      </Wrapper>
+    );
+  }
 }
 
 export default App;
