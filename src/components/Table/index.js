@@ -1,41 +1,47 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
-import "./index.css";
+import React, { Component } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import employees from "../../Employees.json";
 
-function EmployeeTable(props) {
-  console.log(props.employees);
-  return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>DOB</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.employees.length > 0 ? 
-          props.employees.map(employee => (
-            employee.name.includes(props.search)
-            ?
-            <tr>
-              <td><img src={employee.image} alt="emp-img" /></td>
-              <td>{employee.name}</td>
-              <td>{employee.email}</td>
-              <td>{employee.phone}</td>
-              <td>{employee.dob}</td>
-            </tr>
-            :
-            null
-          ))
-          :
-          null
-        }
-      </tbody>
-    </Table>
-  )
+class Table extends Component {
+  state = {
+    employee: [],
+    columns: [
+      {
+        dataField: "name",
+        text: "Name",
+        sort: true,
+        filter: textFilter()
+      },
+      {
+        dataField: "email",
+        text: "Email",
+        sort: true,
+      },
+      {
+        dataField: "phone",
+        text: "Phone",
+        sort: true,
+      },
+      {
+        dataField: "dob",
+        text: "DOB",
+        sort: true,
+      }
+    ],
+  };
+  render() {
+    return (
+      <BootstrapTable
+        striped
+        hover
+        keyField="id"
+        data={employees}
+        columns={this.state.columns}
+        filter={ filterFactory() }
+      />
+    );
+  }
 }
 
-export default EmployeeTable;
+export default Table;
