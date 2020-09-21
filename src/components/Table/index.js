@@ -1,47 +1,55 @@
-import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import employees from "../../Employees.json";
+import React, { useEffect } from 'react';
+import { Table } from 'react-bootstrap';
 
-class Table extends Component {
-  state = {
-    employee: [],
-    columns: [
-      {
-        dataField: "name",
-        text: "Name",
-        sort: true,
-        filter: textFilter()
-      },
-      {
-        dataField: "email",
-        text: "Email",
-        sort: true,
-      },
-      {
-        dataField: "phone",
-        text: "Phone",
-        sort: true,
-      },
-      {
-        dataField: "dob",
-        text: "DOB",
-        sort: true,
-      }
-    ],
-  };
-  render() {
-    return (
-      <BootstrapTable
-        striped
-        hover
-        keyField="id"
-        data={employees}
-        columns={this.state.columns}
-        filter={ filterFactory() }
-      />
-    );
+function EmployeeTable(props) {
+  useEffect(() => {getEmployees()}, [props.employees]);
+
+  const getEmployees = () => {
+    if (props.employees.length > 0) {
+      return props.employees.sort((a, b) => {
+        console.log(props.order);
+        console.log(a);
+        console.log(b);
+        switch (props.order) {
+          case "descend":
+            return a.email < b.email ? 1 : -1;
+          default:
+            return a.email > b.email ? 1 : -1;
+        }
+      })
+      .map((employee) => 
+        employee.name.toLowerCase().includes(props.search.toLowerCase())
+        ?
+        (
+        <tr>
+          <td><img src={employee.image} alt="emp-img" /></td>
+          <td>{employee.name}</td>
+          <td>{employee.email}</td>
+          <td>{employee.phone}</td>
+          <td>{employee.dob}</td>
+        </tr>
+        )
+        :
+        null
+      )
+    }
   }
+  return (
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>DOB</th>
+        </tr>
+      </thead>
+      <tbody>
+        {getEmployees()}
+      </tbody>
+    </Table>
+  )
 }
 
-export default Table;
+export default EmployeeTable;
