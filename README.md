@@ -27,7 +27,7 @@
 
 View live demo <a href="https://darren-behan.github.io/employee-list/">here</a>
 
-![Preview]("Preview of Employee list App")
+![Preview](./public/assets/img/app.png "Preview of Employee list App")
 
 ## License
 
